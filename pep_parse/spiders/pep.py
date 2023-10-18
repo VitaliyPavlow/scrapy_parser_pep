@@ -1,9 +1,8 @@
+from urllib.parse import urljoin
+
 import scrapy
 
 from pep_parse.items import PepParseItem
-
-
-stat_count = {}
 
 
 class PepSpider(scrapy.Spider):
@@ -14,15 +13,15 @@ class PepSpider(scrapy.Spider):
     def parse(self, response: scrapy.http.Response) -> scrapy.http.Request:
         all_peps = response.css("section#numerical-index a")
         for pep in all_peps[1:]:
-            yield response.follow(pep, callback=self.parse_pep)
+            pep_url = urljoin(response.url, pep.attrib["href"]) + "/"
+            yield response.follow(pep_url, callback=self.parse_pep)
 
     def parse_pep(self, response: scrapy.http.Response) -> PepParseItem:
-        num_tit = response.css("h1.page-title::text").get().split(" – ")
+        number_title = response.css("h1.page-title::text").get().split(" – ")
         status = response.css("section#pep-content abbr::text").get()
         data = {
-            "number": int(num_tit[0].replace("PEP ", "")),
-            "name": num_tit[1],
+            "number": int(number_title[0].replace("PEP ", "")),
+            "name": number_title[1],
             "status": status,
         }
-        stat_count[status] = stat_count.get(status, 0) + 1
         yield PepParseItem(data)
