@@ -14,32 +14,32 @@ scrapy crawl pep
 ```
 
 ### Установка
-Клонировать репозиторий и перейти в него в командной строке:
+#### Клонировать репозиторий и перейти в него в командной строке:
 
 ```git@github.com:VitaliyPavlow/scrapy_pareser_pep```
 
-Cоздать и активировать виртуальное окружение:
+#### Cоздать и активировать виртуальное окружение:
 
-Команды для Windows:
+#### Команды для Windows:
 
 ```py -m venv venv```
 
 ```source venv/Scripts/activate```
 
-Команды для Linux и macOS:
+#### Команды для Linux и macOS:
 
 ```python3 -m venv venv```
 
 ```source venv/bin/activate``` 
  
 
-Обновить пакетный менеджер pip:
+#### Обновить пакетный менеджер pip:
 
 ```py -m pip install --upgrade pip``` - для Windows.
 
 ```python3 -m pip install --upgrade pip``` - для Linux и macOS.
 
-Установить зависимости из файла requirements.txt:
+#### Установить зависимости из файла requirements.txt:
 
 ```pip install -r requirements.txt```
 
